@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Check } from 'lucide-react';
+import { Check } from '../components/icons';
 
 interface CheckoutPageProps {
   onNavigate: (page: string) => void;
@@ -93,13 +93,10 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
 
   if (!user) {
     return (
-      <div className="flex-1 bg-gray-50 flex items-center justify-center">
+      <div className="flex-1 bg-brand-cream/60 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600 mb-4">Please sign in to continue</p>
-          <button
-            onClick={() => onNavigate('home')}
-            className="bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-          >
+          <p className="mb-4 text-brand-earth/70">Please sign in to continue</p>
+          <button onClick={() => onNavigate('home')} className="btn-primary">
             Go to Home
           </button>
         </div>
@@ -109,13 +106,10 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
 
   if (items.length === 0 && !orderComplete) {
     return (
-      <div className="flex-1 bg-gray-50 flex items-center justify-center">
+      <div className="flex-1 bg-brand-cream/60 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600 mb-4">Your cart is empty</p>
-          <button
-            onClick={() => onNavigate('shop')}
-            className="bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-          >
+          <p className="mb-4 text-brand-earth/70">Your cart is empty</p>
+          <button onClick={() => onNavigate('shop')} className="btn-primary">
             Browse Products
           </button>
         </div>
@@ -125,31 +119,25 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
 
   if (orderComplete) {
     return (
-      <div className="flex-1 bg-gray-50 py-12">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg p-8 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Check className="h-10 w-10 text-green-600" />
+      <div className="flex-1 bg-brand-cream/60 py-12">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-8 text-center shadow-soft">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand-sage/60">
+              <Check className="h-10 w-10 text-brand-earth" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Order Confirmed!</h1>
-            <p className="text-gray-600 mb-6">
+            <h1 className="mb-4 text-3xl font-display text-brand-charcoal">Order Confirmed!</h1>
+            <p className="mb-6 text-brand-earth/80">
               Thank you for your purchase. Your order has been confirmed and will be shipped soon.
             </p>
-            <div className="bg-gray-50 rounded-lg p-6 mb-6">
-              <p className="text-sm text-gray-600 mb-2">Order Number</p>
-              <p className="text-2xl font-bold text-gray-900">{orderNumber}</p>
+            <div className="mb-6 rounded-2xl border border-brand-cream/80 bg-white/80 p-6">
+              <p className="text-sm font-accent uppercase tracking-[0.2em] text-brand-earth/70">Order Number</p>
+              <p className="mt-2 text-2xl font-display text-brand-charcoal">{orderNumber}</p>
             </div>
-            <div className="flex gap-4 justify-center">
-              <button
-                onClick={() => onNavigate('account')}
-                className="bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-              >
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button onClick={() => onNavigate('account')} className="btn-primary">
                 View Orders
               </button>
-              <button
-                onClick={() => onNavigate('shop')}
-                className="border border-gray-300 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-              >
+              <button onClick={() => onNavigate('shop')} className="btn-secondary">
                 Continue Shopping
               </button>
             </div>
@@ -164,92 +152,92 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
   const orderTotal = total + shippingCost + tax;
 
   return (
-    <div className="flex-1 bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+    <div className="flex-1 bg-brand-cream/60 py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h1 className="mb-8 text-3xl font-display text-brand-charcoal">Checkout</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8 rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Shipping Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <h2 className="text-xl font-display text-brand-charcoal">Shipping Information</h2>
+                <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Full Name *</label>
                     <input
                       type="text"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Email *</label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Phone *</label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Country *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Country *</label>
                     <input
                       type="text"
                       value={formData.country}
                       onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Address Line 1 *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Address Line 1 *</label>
                     <input
                       type="text"
                       value={formData.addressLine1}
                       onChange={(e) => setFormData({ ...formData, addressLine1: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Address Line 2</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Address Line 2</label>
                     <input
                       type="text"
                       value={formData.addressLine2}
                       onChange={(e) => setFormData({ ...formData, addressLine2: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">City *</label>
                     <input
                       type="text"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Postal Code *</label>
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Postal Code *</label>
                     <input
                       type="text"
                       value={formData.postalCode}
                       onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                      className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                       required
                     />
                   </div>
@@ -257,63 +245,63 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Payment Method</h2>
-                <div className="space-y-3">
-                  <label className="flex items-center gap-3 p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-gray-900 transition-colors">
+                <h2 className="text-xl font-display text-brand-charcoal">Payment Method</h2>
+                <div className="mt-4 space-y-3">
+                  <label className={`flex items-center gap-3 rounded-2xl border-2 px-4 py-4 transition-colors duration-300 ${
+                    formData.paymentMethod === 'card' ? 'border-brand-rose bg-brand-powder/60' : 'border-brand-cream hover:border-brand-rose'
+                  }`}>
                     <input
                       type="radio"
                       name="payment"
                       value="card"
                       checked={formData.paymentMethod === 'card'}
                       onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
-                      className="w-4 h-4"
+                      className="h-4 w-4 text-brand-rose focus:ring-brand-rose"
                     />
-                    <span className="font-medium">Credit/Debit Card</span>
+                    <span className="font-accent text-brand-charcoal">Credit/Debit Card</span>
                   </label>
-                  <label className="flex items-center gap-3 p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-gray-900 transition-colors">
+                  <label className={`flex items-center gap-3 rounded-2xl border-2 px-4 py-4 transition-colors duration-300 ${
+                    formData.paymentMethod === 'paypal' ? 'border-brand-rose bg-brand-powder/60' : 'border-brand-cream hover:border-brand-rose'
+                  }`}>
                     <input
                       type="radio"
                       name="payment"
                       value="paypal"
                       checked={formData.paymentMethod === 'paypal'}
                       onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
-                      className="w-4 h-4"
+                      className="h-4 w-4 text-brand-rose focus:ring-brand-rose"
                     />
-                    <span className="font-medium">PayPal</span>
+                    <span className="font-accent text-brand-charcoal">PayPal</span>
                   </label>
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-gray-900 text-white py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
+              <button type="submit" disabled={loading} className="btn-primary w-full disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70">
                 {loading ? 'Processing...' : 'Place Order'}
               </button>
             </form>
           </div>
 
           <div>
-            <div className="bg-white rounded-lg p-6 sticky top-24">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h2>
+            <div className="sticky top-24 rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
+              <h2 className="text-xl font-display text-brand-charcoal">Order Summary</h2>
 
-              <div className="space-y-4 mb-6 max-h-64 overflow-y-auto">
+              <div className="mt-6 mb-6 max-h-64 space-y-4 overflow-y-auto">
                 {items.map((item) => (
                   <div key={item.id} className="flex gap-3">
-                    <div className="w-16 h-16 bg-gray-100 rounded flex-shrink-0 overflow-hidden">
+                    <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-2xl bg-brand-cream">
                       {item.product.images?.[0] && (
                         <img
                           src={item.product.images[0]}
                           alt={item.product.name}
-                          className="w-full h-full object-cover"
+                          className="h-full w-full object-cover"
                         />
                       )}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 line-clamp-2">{item.product.name}</p>
-                      <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
-                      <p className="text-sm font-semibold text-gray-900">
+                    <div className="min-w-0 flex-1">
+                      <p className="line-clamp-2 text-sm font-display text-brand-charcoal">{item.product.name}</p>
+                      <p className="text-sm text-brand-earth/70">Qty: {item.quantity}</p>
+                      <p className="text-sm font-semibold text-brand-earth">
                         ${(item.product.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -321,20 +309,20 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
                 ))}
               </div>
 
-              <div className="border-t border-gray-200 pt-4 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="font-medium">${total.toFixed(2)}</span>
+              <div className="space-y-3 border-t border-brand-cream pt-4 text-sm text-brand-earth/80">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-brand-charcoal">${total.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium">${shippingCost.toFixed(2)}</span>
+                <div className="flex justify-between">
+                  <span>Shipping</span>
+                  <span className="font-semibold text-brand-charcoal">${shippingCost.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Tax (20%)</span>
-                  <span className="font-medium">${tax.toFixed(2)}</span>
+                <div className="flex justify-between">
+                  <span>Tax (20%)</span>
+                  <span className="font-semibold text-brand-charcoal">${tax.toFixed(2)}</span>
                 </div>
-                <div className="border-t border-gray-200 pt-2 flex justify-between text-lg font-bold">
+                <div className="flex justify-between border-t border-brand-cream pt-3 text-base font-display text-brand-charcoal">
                   <span>Total</span>
                   <span>${orderTotal.toFixed(2)}</span>
                 </div>

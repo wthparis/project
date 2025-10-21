@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Filter, Star } from 'lucide-react';
+import { Filter, Star } from '../components/icons';
 import { supabase } from '../lib/supabase';
 import type { Database } from '../lib/database.types';
 
@@ -96,19 +96,20 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
   };
 
   return (
-    <div className="flex-1 bg-gray-50">
+    <div className="flex-1 bg-brand-cream/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Shop All Products</h1>
+            <span className="badge-soft">boutique</span>
+            <h1 className="mt-4 text-3xl font-display text-brand-charcoal">Shop All Products</h1>
             {searchQuery && (
-              <p className="text-gray-600">Showing results for "{searchQuery}"</p>
+              <p className="text-brand-earth/70">Showing results for "{searchQuery}"</p>
             )}
           </div>
 
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="lg:hidden flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            className="lg:hidden btn-secondary"
           >
             <Filter className="h-5 w-5" />
             Filters
@@ -117,12 +118,12 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
 
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className={`lg:w-64 space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-4">Sort By</h3>
+            <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
+              <h3 className="font-accent text-sm uppercase tracking-[0.2em] text-brand-earth/70 mb-4">Sort By</h3>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                className="w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
               >
                 <option value="name">Name (A-Z)</option>
                 <option value="price_asc">Price (Low to High)</option>
@@ -131,15 +132,15 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
               </select>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
+            <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
+              <h3 className="font-accent text-sm uppercase tracking-[0.2em] text-brand-earth/70 mb-4">Categories</h3>
               <div className="space-y-2">
                 <button
                   onClick={() => setSelectedCategory(null)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                  className={`w-full rounded-2xl px-4 py-2 text-left transition-all duration-300 ${
                     selectedCategory === null
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-brand-rose text-white shadow-soft'
+                      : 'text-brand-earth/80 hover:bg-brand-powder/60 hover:text-brand-earth'
                   }`}
                 >
                   All Categories
@@ -148,10 +149,10 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    className={`w-full rounded-2xl px-4 py-2 text-left transition-all duration-300 ${
                       selectedCategory === category.id
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-brand-rose text-white shadow-soft'
+                        : 'text-brand-earth/80 hover:bg-brand-powder/60 hover:text-brand-earth'
                     }`}
                   >
                     {category.name}
@@ -160,15 +161,15 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-4">Brands</h3>
+            <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
+              <h3 className="font-accent text-sm uppercase tracking-[0.2em] text-brand-earth/70 mb-4">Brands</h3>
               <div className="space-y-2">
                 <button
                   onClick={() => setSelectedBrand(null)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                  className={`w-full rounded-2xl px-4 py-2 text-left transition-all duration-300 ${
                     selectedBrand === null
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-brand-rose text-white shadow-soft'
+                      : 'text-brand-earth/80 hover:bg-brand-powder/60 hover:text-brand-earth'
                   }`}
                 >
                   All Brands
@@ -177,10 +178,10 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
                   <button
                     key={brand.id}
                     onClick={() => setSelectedBrand(brand.id)}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                    className={`w-full rounded-2xl px-4 py-2 text-left transition-all duration-300 ${
                       selectedBrand === brand.id
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-brand-rose text-white shadow-soft'
+                        : 'text-brand-earth/80 hover:bg-brand-powder/60 hover:text-brand-earth'
                     }`}
                   >
                     {brand.name}
@@ -192,73 +193,77 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
 
           <main className="flex-1">
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-lg p-4 animate-pulse">
-                    <div className="aspect-square bg-gray-200 rounded-lg mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                  <div key={i} className="animate-pulse rounded-3xl border border-brand-cream/60 bg-white/80 p-5">
+                    <div className="mb-4 aspect-square rounded-2xl bg-brand-cream/70"></div>
+                    <div className="mb-2 h-4 rounded-full bg-brand-cream"></div>
+                    <div className="h-4 w-2/3 rounded-full bg-brand-cream"></div>
                   </div>
                 ))}
               </div>
             ) : products.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {products.map((product) => (
                   <button
                     key={product.id}
                     onClick={() => onNavigate(`product/${product.slug}`)}
-                    className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 text-left"
+                    className="group overflow-hidden rounded-3xl border border-brand-cream/80 bg-white/90 text-left shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <div className="aspect-square bg-gray-100 flex items-center justify-center relative">
+                    <div className="relative aspect-square overflow-hidden rounded-3xl bg-brand-cream">
                       {product.images && product.images.length > 0 ? (
                         <img
                           src={product.images[0]}
                           alt={product.name}
-                          className="w-full h-full object-cover"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="text-gray-400">No image</div>
+                        <div className="flex h-full w-full items-center justify-center text-sm text-brand-earth/50">No image</div>
                       )}
                       {product.original_price && product.original_price > product.price && (
-                        <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                        <div className="absolute right-3 top-3 rounded-full bg-brand-rose px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
                           SALE
                         </div>
                       )}
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                      <div className="flex items-center gap-2 mb-2">
+                    <div className="space-y-3 p-5">
+                      <h3 className="line-clamp-2 font-display text-lg text-brand-charcoal">{product.name}</h3>
+                      <div className="flex items-center gap-2 text-sm text-brand-earth/70">
                         <div className="flex items-center">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm text-gray-600 ml-1">{product.rating_average.toFixed(1)}</span>
+                          <Star className="h-4 w-4 fill-brand-rose text-brand-rose" />
+                          <span className="ml-1">{product.rating_average.toFixed(1)}</span>
                         </div>
-                        <span className="text-xs text-gray-400">({product.rating_count})</span>
+                        <span>({product.rating_count})</span>
                       </div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-lg font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-semibold text-brand-earth">${product.price.toFixed(2)}</span>
                         {product.original_price && product.original_price > product.price && (
-                          <span className="text-sm text-gray-500 line-through">${product.original_price.toFixed(2)}</span>
+                          <span className="text-sm text-brand-earth/50 line-through">
+                            ${product.original_price.toFixed(2)}
+                          </span>
                         )}
                       </div>
                       {product.stock_quantity < 10 && product.stock_quantity > 0 && (
-                        <p className="text-xs text-orange-600 font-medium">Only {product.stock_quantity} left!</p>
+                        <p className="text-xs font-accent uppercase tracking-[0.2em] text-brand-rose">
+                          Only {product.stock_quantity} left!
+                        </p>
                       )}
                       {product.stock_quantity === 0 && (
-                        <p className="text-xs text-red-600 font-medium">Out of stock</p>
+                        <p className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/60">Out of stock</p>
                       )}
                     </div>
                   </button>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 bg-white rounded-lg">
-                <p className="text-gray-600 mb-4">No products found matching your criteria.</p>
+              <div className="rounded-3xl border border-brand-cream/80 bg-white/90 py-12 text-center">
+                <p className="mb-4 text-brand-earth/70">No products found matching your criteria.</p>
                 <button
                   onClick={() => {
                     setSelectedCategory(null);
                     setSelectedBrand(null);
                   }}
-                  className="text-gray-900 font-semibold hover:underline"
+                  className="font-accent text-brand-earth transition-colors duration-300 hover:text-brand-rose"
                 >
                   Clear filters
                 </button>

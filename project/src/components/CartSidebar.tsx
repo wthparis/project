@@ -1,4 +1,4 @@
-import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag } from './icons';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -26,64 +26,68 @@ export function CartSidebar({ isOpen, onClose, onNavigate, onOpenAuth }: CartSid
 
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose}></div>
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl z-50 flex flex-col">
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-bold text-gray-900">Shopping Cart</h2>
+      <div className="fixed inset-0 z-40 bg-brand-charcoal/40 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white/95 shadow-soft">
+        <div className="flex items-center justify-between border-b border-brand-cream/70 px-6 py-6">
+          <div className="space-y-1">
+            <span className="badge-soft">your basket</span>
+            <h2 className="text-2xl font-display text-brand-charcoal">Shopping Cart</h2>
+          </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="rounded-full p-2 text-brand-earth/60 transition-colors duration-300 hover:bg-brand-powder/60 hover:text-brand-earth"
+            aria-label="Close cart"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         {items.length > 0 ? (
           <>
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto px-6 py-6">
               <div className="space-y-4">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-4 bg-gray-50 rounded-lg p-4">
-                    <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
+                  <div key={item.id} className="flex gap-4 rounded-2xl bg-brand-cream/70 p-4">
+                    <div className="h-24 w-24 overflow-hidden rounded-2xl bg-brand-cream flex-shrink-0">
                       {item.product.images && item.product.images.length > 0 ? (
                         <img
                           src={item.product.images[0]}
                           alt={item.product.name}
-                          className="w-full h-full object-cover"
+                          className="h-full w-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+                        <div className="flex h-full w-full items-center justify-center text-xs text-brand-earth/60">
                           No image
                         </div>
                       )}
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
+                      <h3 className="mb-1 line-clamp-2 font-semibold text-brand-charcoal">
                         {item.product.name}
                       </h3>
-                      <p className="text-gray-900 font-bold mb-2">
+                      <p className="mb-3 font-display text-lg text-brand-earth">
                         ${item.product.price.toFixed(2)}
                       </p>
 
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => updateQuantity(item.product_id, item.quantity - 1)}
-                          className="p-1 rounded hover:bg-gray-200 transition-colors"
+                          className="rounded-full bg-white/80 p-2 text-brand-earth/70 transition-colors duration-300 hover:bg-brand-powder/70 hover:text-brand-earth"
                         >
                           <Minus className="h-4 w-4" />
                         </button>
-                        <span className="text-sm font-medium w-8 text-center">{item.quantity}</span>
+                        <span className="w-10 text-center font-accent text-sm text-brand-charcoal">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.product_id, item.quantity + 1)}
                           disabled={item.quantity >= item.product.stock_quantity}
-                          className="p-1 rounded hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="rounded-full bg-white/80 p-2 text-brand-earth/70 transition-colors duration-300 hover:bg-brand-powder/70 hover:text-brand-earth disabled:cursor-not-allowed disabled:opacity-40"
                         >
                           <Plus className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => removeItem(item.product_id)}
-                          className="ml-auto text-sm text-red-600 hover:text-red-800 transition-colors"
+                          className="ml-auto text-sm font-accent text-brand-earth/70 transition-colors duration-300 hover:text-brand-earth"
                         >
                           Remove
                         </button>
@@ -94,40 +98,34 @@ export function CartSidebar({ isOpen, onClose, onNavigate, onOpenAuth }: CartSid
               </div>
             </div>
 
-            <div className="border-t border-gray-200 p-6 space-y-4">
-              <div className="flex items-center justify-between text-lg font-bold">
-                <span>Total:</span>
-                <span>${total.toFixed(2)}</span>
+            <div className="space-y-4 border-t border-brand-cream/70 px-6 py-6">
+              <div className="flex items-center justify-between text-lg font-semibold text-brand-charcoal">
+                <span>Total</span>
+                <span className="font-display">${total.toFixed(2)}</span>
               </div>
 
-              <button
-                onClick={handleCheckout}
-                className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-              >
+              <button onClick={handleCheckout} className="btn-primary w-full">
                 Proceed to Checkout
               </button>
 
-              <button
-                onClick={onClose}
-                className="w-full border border-gray-300 text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-              >
+              <button onClick={onClose} className="btn-secondary w-full">
                 Continue Shopping
               </button>
             </div>
           </>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center p-6">
-            <ShoppingBag className="h-24 w-24 text-gray-300 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Your cart is empty</h3>
-            <p className="text-gray-600 text-center mb-6">
-              Add some products to get started
-            </p>
+          <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
+            <ShoppingBag className="h-20 w-20 text-brand-sage" />
+            <div className="space-y-2">
+              <h3 className="text-2xl font-display text-brand-charcoal">Your cart is empty</h3>
+              <p className="text-sm text-brand-earth/70">Add some products to begin your ritual.</p>
+            </div>
             <button
               onClick={() => {
                 onClose();
                 onNavigate('shop');
               }}
-              className="bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+              className="btn-primary"
             >
               Browse Products
             </button>

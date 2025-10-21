@@ -66,7 +66,7 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-brand-cream flex flex-col">
           <Header
             onNavigate={handleNavigate}
             onOpenCart={() => setCartOpen(true)}
