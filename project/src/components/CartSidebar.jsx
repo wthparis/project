@@ -2,14 +2,7 @@ import { X, Minus, Plus, ShoppingBag } from './icons';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 
-interface CartSidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onNavigate: (page: string) => void;
-  onOpenAuth: () => void;
-}
-
-export function CartSidebar({ isOpen, onClose, onNavigate, onOpenAuth }: CartSidebarProps) {
+export function CartSidebar({ isOpen, onClose, onNavigate, onOpenAuth }) {
   const { user } = useAuth();
   const { items, updateQuantity, removeItem, total } = useCart();
 

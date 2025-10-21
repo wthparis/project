@@ -2,20 +2,13 @@ import { useState, useEffect } from 'react';
 import { Package, User } from '../components/icons';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import type { Database } from '../lib/database.types';
+import './AccountPage.css';
 
-type Order = Database['public']['Tables']['orders']['Row'];
-type OrderItem = Database['public']['Tables']['order_items']['Row'];
-
-interface AccountPageProps {
-  onNavigate: (page: string) => void;
-}
-
-export function AccountPage({ onNavigate }: AccountPageProps) {
+export function AccountPage({ onNavigate }) {
   const { user, profile } = useAuth();
-  const [orders, setOrders] = useState<(Order & { items: OrderItem[] })[]>([]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'orders' | 'profile'>('orders');
+  const [activeTab, setActiveTab] = useState('orders');
 
   useEffect(() => {
     if (user) {
@@ -68,7 +61,7 @@ export function AccountPage({ onNavigate }: AccountPageProps) {
     );
   }
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
       case 'delivered':
         return 'bg-brand-sage/60 text-brand-earth';
@@ -84,13 +77,13 @@ export function AccountPage({ onNavigate }: AccountPageProps) {
   };
 
   return (
-    <div className="flex-1 bg-brand-cream/60 py-8">
+    <div className="account-page flex-1 bg-brand-cream/60 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h1 className="mb-8 text-3xl font-display text-brand-charcoal">My Account</h1>
 
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="account-layout flex flex-col md:flex-row gap-8">
           <aside className="md:w-64">
-            <div className="space-y-2 rounded-3xl border border-brand-cream/80 bg-white/90 p-4 shadow-soft">
+            <div className="tab-card space-y-2 rounded-3xl border border-brand-cream/80 bg-white/90 p-4 shadow-soft">
               <button
                 onClick={() => setActiveTab('orders')}
                 className={`w-full flex items-center gap-3 rounded-2xl px-4 py-3 font-accent transition-all duration-300 ${

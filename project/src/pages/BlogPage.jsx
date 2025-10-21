@@ -1,18 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Calendar, User } from '../components/icons';
 import { supabase } from '../lib/supabase';
-import type { Database } from '../lib/database.types';
+import './BlogPage.css';
 
-type BlogPost = Database['public']['Tables']['blog_posts']['Row'] & {
-  profiles: { full_name: string | null } | null;
-};
-
-interface BlogPageProps {
-  onNavigate: (page: string) => void;
-}
-
-export function BlogPage({ onNavigate }: BlogPageProps) {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+export function BlogPage({ onNavigate }) {
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +20,7 @@ export function BlogPage({ onNavigate }: BlogPageProps) {
         .order('published_at', { ascending: false });
 
       if (error) throw error;
-      setPosts(data as BlogPost[]);
+      setPosts(data ?? []);
     } catch (error) {
       console.error('Error loading posts:', error);
     } finally {
@@ -37,7 +29,7 @@ export function BlogPage({ onNavigate }: BlogPageProps) {
   };
 
   return (
-    <div className="flex-1 bg-brand-cream/60 py-12">
+    <div className="blog-page flex-1 bg-brand-cream/60 py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <span className="badge-soft mx-auto">journal</span>

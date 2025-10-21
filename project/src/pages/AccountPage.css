@@ -1,0 +1,20 @@
+.account-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-layout {
+  min-height: 60vh;
+}
+
+.tab-card button {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tab-card button:hover {
+  transform: translateX(4px);
+}
+
+.account-page .animate-pulse {
+  background: linear-gradient(135deg, rgba(248, 244, 239, 0.8), rgba(183, 199, 163, 0.2));
+}

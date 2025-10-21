@@ -3,12 +3,9 @@ import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Check } from '../components/icons';
+import './CheckoutPage.css';
 
-interface CheckoutPageProps {
-  onNavigate: (page: string) => void;
-}
-
-export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
+export function CheckoutPage({ onNavigate }) {
   const { user } = useAuth();
   const { items, total, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
@@ -27,7 +24,7 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
     paymentMethod: 'card',
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user || items.length === 0) return;
 
@@ -119,7 +116,7 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
 
   if (orderComplete) {
     return (
-      <div className="flex-1 bg-brand-cream/60 py-12">
+      <div className="checkout-page flex-1 bg-brand-cream/60 py-12">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-8 text-center shadow-soft">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-brand-sage/60">
@@ -152,13 +149,13 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
   const orderTotal = total + shippingCost + tax;
 
   return (
-    <div className="flex-1 bg-brand-cream/60 py-8">
+    <div className="checkout-page flex-1 bg-brand-cream/60 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h1 className="mb-8 text-3xl font-display text-brand-charcoal">Checkout</h1>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-8 rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
+            <form onSubmit={handleSubmit} className="checkout-form space-y-8 rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
               <div>
                 <h2 className="text-xl font-display text-brand-charcoal">Shipping Information</h2>
                 <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -283,7 +280,7 @@ export function CheckoutPage({ onNavigate }: CheckoutPageProps) {
           </div>
 
           <div>
-            <div className="sticky top-24 rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
+            <div className="order-summary sticky top-24 rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
               <h2 className="text-xl font-display text-brand-charcoal">Order Summary</h2>
 
               <div className="mt-6 mb-6 max-h-64 space-y-4 overflow-y-auto">

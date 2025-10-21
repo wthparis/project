@@ -1,0 +1,25 @@
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-form {
+  backdrop-filter: blur(6px);
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus,
+.checkout-form select:focus {
+  box-shadow: 0 12px 32px rgba(197, 164, 126, 0.22);
+}
+
+.order-summary {
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 40px rgba(47, 47, 47, 0.12);
+}

@@ -1,0 +1,47 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.home-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(233, 210, 200, 0.25), transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.featured-section button {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsletter {
+  position: relative;
+  isolation: isolate;
+}
+
+.newsletter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 48px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+  opacity: 0.4;
+  z-index: -1;
+}
+
+.newsletter-form input {
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 32px rgba(21, 36, 32, 0.18);
+}
+
+.newsletter-form button {
+  transition: transform 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  transform: translateY(-2px);
+}

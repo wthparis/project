@@ -1,9 +1,10 @@
 import { Heart, Award, Truck } from '../components/icons';
+import './AboutPage.css';
 
 export function AboutPage() {
   return (
-    <div className="flex-1">
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-brand-cream to-brand-sage/30 py-20">
+    <div className="about-page flex-1">
+      <section className="about-hero relative overflow-hidden bg-gradient-to-br from-white via-brand-cream to-brand-sage/30 py-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-brand-powder/60 blur-3xl" />
           <div className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-brand-sage/50 blur-3xl" />
@@ -55,7 +56,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-brand-cream/60 py-20">
+      <section className="bg-brand-cream/60 py-20 about-story">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
             <div className="space-y-6">

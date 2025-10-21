@@ -1,0 +1,21 @@
+.about-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(197, 164, 126, 0.18), rgba(183, 199, 163, 0.2));
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.about-story .bg-cover {
+  filter: saturate(0.85) contrast(1.02);
+}
+
+.about-story p {
+  line-height: 1.8;
+}

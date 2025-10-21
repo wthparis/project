@@ -1,0 +1,35 @@
+.shop-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-page__header {
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.shop-layout {
+  min-height: 60vh;
+}
+
+.filters-panel {
+  position: sticky;
+  top: 96px;
+  align-self: flex-start;
+}
+
+.filters-panel button {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.filters-panel button:hover {
+  transform: translateX(4px);
+}
+
+.filters-panel select {
+  background-image: linear-gradient(135deg, rgba(183, 199, 163, 0.25), rgba(197, 164, 126, 0.1));
+}
+
+.shop-page .group {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}

@@ -3,24 +3,13 @@ import { Star, ShoppingCart, Heart, Check } from '../components/icons';
 import { supabase } from '../lib/supabase';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
-import type { Database } from '../lib/database.types';
+import './ProductPage.css';
 
-type Product = Database['public']['Tables']['products']['Row'];
-type Review = Database['public']['Tables']['reviews']['Row'] & {
-  profiles: { full_name: string | null };
-};
-
-interface ProductPageProps {
-  slug: string;
-  onNavigate: (page: string) => void;
-  onOpenAuth: () => void;
-}
-
-export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) {
+export function ProductPage({ slug, onNavigate, onOpenAuth }) {
   const { user } = useAuth();
   const { addItem } = useCart();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [product, setProduct] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -58,7 +47,7 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
         .order('created_at', { ascending: false });
 
       if (reviewError) throw reviewError;
-      setReviews(reviewData as Review[]);
+      setReviews(reviewData ?? []);
     } catch (error) {
       console.error('Error loading product:', error);
     } finally {
@@ -82,7 +71,7 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
     }
   };
 
-  const handleSubmitReview = async (e: React.FormEvent) => {
+  const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (!user || !product) {
       onOpenAuth();
@@ -132,11 +121,11 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
   }
 
   return (
-    <div className="flex-1 bg-brand-cream/60 py-8">
+    <div className="product-page flex-1 bg-brand-cream/60 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 rounded-3xl border border-brand-cream/80 bg-white/90 p-4 md:p-10 shadow-soft">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-            <div>
+          <div className="product-layout grid grid-cols-1 gap-10 md:grid-cols-2">
+            <div className="product-gallery">
               <div className="mb-4 aspect-square overflow-hidden rounded-3xl bg-brand-cream">
                 {product.images && product.images.length > 0 ? (
                   <img
@@ -152,7 +141,7 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
               </div>
 
               {product.images && product.images.length > 1 && (
-                <div className="grid grid-cols-4 gap-3">
+                <div className="gallery-thumbs grid grid-cols-4 gap-3">
                   {product.images.map((image, index) => (
                     <button
                       key={index}

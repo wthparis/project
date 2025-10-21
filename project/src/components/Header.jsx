@@ -3,20 +3,13 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 
-interface HeaderProps {
-  onNavigate: (page: string) => void;
-  onOpenCart: () => void;
-  onOpenAuth: () => void;
-  currentPage: string;
-}
-
-export function Header({ onNavigate, onOpenCart, onOpenAuth, currentPage }: HeaderProps) {
+export function Header({ onNavigate, onOpenCart, onOpenAuth, currentPage }) {
   const { user, signOut } = useAuth();
   const { itemCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       onNavigate(`shop?search=${encodeURIComponent(searchQuery)}`);

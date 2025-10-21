@@ -1,26 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Filter, Star } from '../components/icons';
 import { supabase } from '../lib/supabase';
-import type { Database } from '../lib/database.types';
+import './ShopPage.css';
 
-type Product = Database['public']['Tables']['products']['Row'];
-type Category = Database['public']['Tables']['categories']['Row'];
-type Brand = Database['public']['Tables']['brands']['Row'];
-
-interface ShopPageProps {
-  onNavigate: (page: string) => void;
-  searchQuery?: string;
-}
-
-export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [brands, setBrands] = useState<Brand[]>([]);
+export function ShopPage({ onNavigate, searchQuery }) {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
-  const [sortBy, setSortBy] = useState<string>('name');
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [sortBy, setSortBy] = useState('name');
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
@@ -96,9 +87,9 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
   };
 
   return (
-    <div className="flex-1 bg-brand-cream/60">
+    <div className="shop-page flex-1 bg-brand-cream/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 shop-page__header">
           <div>
             <span className="badge-soft">boutique</span>
             <h1 className="mt-4 text-3xl font-display text-brand-charcoal">Shop All Products</h1>
@@ -116,8 +107,8 @@ export function ShopPage({ onNavigate, searchQuery }: ShopPageProps) {
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className={`lg:w-64 space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
+        <div className="shop-layout flex flex-col lg:flex-row gap-8">
+          <aside className={`filters-panel lg:w-64 space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
             <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-6 shadow-soft">
               <h3 className="font-accent text-sm uppercase tracking-[0.2em] text-brand-earth/70 mb-4">Sort By</h3>
               <select

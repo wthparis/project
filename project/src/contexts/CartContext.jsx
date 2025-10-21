@@ -1,27 +1,12 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
-import type { Database } from '../lib/database.types';
 
-type Product = Database['public']['Tables']['products']['Row'];
-type CartItem = Database['public']['Tables']['cart_items']['Row'] & { product: Product };
+const CartContext = createContext(undefined);
 
-interface CartContextType {
-  items: CartItem[];
-  loading: boolean;
-  addItem: (productId: string, quantity: number) => Promise<void>;
-  updateQuantity: (productId: string, quantity: number) => Promise<void>;
-  removeItem: (productId: string) => Promise<void>;
-  clearCart: () => Promise<void>;
-  total: number;
-  itemCount: number;
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-export function CartProvider({ children }: { children: ReactNode }) {
+export function CartProvider({ children }) {
   const { user } = useAuth();
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -43,7 +28,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         .eq('user_id', user.id);
 
       if (error) throw error;
-      setItems(data as CartItem[]);
+      setItems(data ?? []);
     } catch (error) {
       console.error('Error loading cart:', error);
     } finally {
@@ -51,11 +36,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const addItem = async (productId: string, quantity: number) => {
+  const addItem = async (productId, quantity) => {
     if (!user) return;
 
     try {
-      const existingItem = items.find(item => item.product_id === productId);
+      const existingItem = items.find((item) => item.product_id === productId);
 
       if (existingItem) {
         await updateQuantity(productId, existingItem.quantity + quantity);
@@ -74,7 +59,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const updateQuantity = async (productId: string, quantity: number) => {
+  const updateQuantity = async (productId, quantity) => {
     if (!user) return;
 
     try {
@@ -96,7 +81,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const removeItem = async (productId: string) => {
+  const removeItem = async (productId) => {
     if (!user) return;
 
     try {

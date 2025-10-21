@@ -1,16 +1,10 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Droplet, Leaf, Sparkles, Star } from '../components/icons';
 import { supabase } from '../lib/supabase';
-import type { Database } from '../lib/database.types';
+import './HomePage.css';
 
-type Product = Database['public']['Tables']['products']['Row'];
-
-interface HomePageProps {
-  onNavigate: (page: string) => void;
-}
-
-export function HomePage({ onNavigate }: HomePageProps) {
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+export function HomePage({ onNavigate }) {
+  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,8 +30,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
   };
 
   return (
-    <div className="flex-1">
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-brand-cream to-brand-sage/30 py-24 md:py-32">
+    <div className="home-page flex-1">
+      <section className="home-hero relative overflow-hidden bg-gradient-to-br from-white via-brand-cream to-brand-sage/30 py-24 md:py-32">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-brand-powder/60 blur-3xl" />
           <div className="absolute -left-24 bottom-10 h-64 w-64 rounded-full bg-brand-sage/40 blur-3xl" />
@@ -94,7 +88,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      <section className="bg-brand-cream py-20">
+      <section className="bg-brand-cream py-20 featured-section">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="badge-soft mx-auto">essentials</span>
@@ -172,13 +166,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       <section className="bg-brand-olive py-20 text-white">
-        <div className="mx-auto max-w-4xl px-4 text-center">
+        <div className="mx-auto max-w-4xl px-4 text-center newsletter">
           <span className="badge-soft mx-auto bg-white/20 text-white">newsletter</span>
           <h2 className="mt-6 text-3xl font-display">Join Our Beauty Community</h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
             Receive expert rituals, early access to new creations, and exclusive offers crafted for mindful self-care.
           </p>
-          <form className="mx-auto mt-10 flex flex-col gap-4 sm:flex-row">
+          <form className="newsletter-form mx-auto mt-10 flex flex-col gap-4 sm:flex-row">
             <input
               type="email"
               placeholder="Enter your email"
