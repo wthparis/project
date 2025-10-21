@@ -46,80 +46,87 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-md w-full p-6 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-charcoal/40 p-4 backdrop-blur-sm">
+      <div className="relative w-full max-w-lg rounded-3xl bg-white/95 p-8 shadow-soft">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute right-5 top-5 rounded-full p-2 text-brand-earth/60 transition-colors duration-300 hover:bg-brand-powder/60 hover:text-brand-earth"
+          aria-label="Close authentication modal"
         >
-          <X className="h-6 w-6" />
+          <X className="h-5 w-5" />
         </button>
 
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          {mode === 'signin' ? 'Sign In' : 'Create Account'}
-        </h2>
+        <div className="mb-8 space-y-3">
+          <span className="badge-soft">welcome</span>
+          <h2 className="text-3xl font-display text-brand-charcoal">
+            {mode === 'signin' ? 'Reconnect to your ritual' : 'Create your beauty sanctuary'}
+          </h2>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {mode === 'signup' && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <div className="space-y-2">
+              <label className="text-sm font-accent uppercase tracking-[0.18em] text-brand-earth/70">Full Name</label>
               <input
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                className="w-full rounded-2xl border border-brand-sage/50 bg-white px-4 py-3 text-sm text-brand-charcoal placeholder:text-brand-earth/50 shadow-inner transition-all duration-300 ease-out focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                 required
               />
             </div>
           )}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <div className="space-y-2">
+            <label className="text-sm font-accent uppercase tracking-[0.18em] text-brand-earth/70">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="w-full rounded-2xl border border-brand-sage/50 bg-white px-4 py-3 text-sm text-brand-charcoal placeholder:text-brand-earth/50 shadow-inner transition-all duration-300 ease-out focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
               required
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+          <div className="space-y-2">
+            <label className="text-sm font-accent uppercase tracking-[0.18em] text-brand-earth/70">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+              className="w-full rounded-2xl border border-brand-sage/50 bg-white px-4 py-3 text-sm text-brand-charcoal placeholder:text-brand-earth/50 shadow-inner transition-all duration-300 ease-out focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
               required
               minLength={6}
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-              <p className="text-red-800 text-sm">{error}</p>
+            <div className="rounded-2xl border border-brand-rose/40 bg-brand-powder/60 px-4 py-3 text-sm text-brand-earth">
+              {error}
             </div>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
           >
             {loading ? 'Loading...' : mode === 'signin' ? 'Sign In' : 'Create Account'}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-8 text-center">
           <button
             onClick={() => {
               setMode(mode === 'signin' ? 'signup' : 'signin');
               setError('');
             }}
-            className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-sm font-accent text-brand-earth/80 transition-colors duration-300 hover:text-brand-earth"
           >
-            {mode === 'signin' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+            {mode === 'signin' ? "Don't have an account?" : 'Already have an account?'}{' '}
+            <span className="font-semibold text-brand-charcoal">
+              {mode === 'signin' ? 'Create one' : 'Sign in'}
+            </span>
           </button>
         </div>
       </div>
