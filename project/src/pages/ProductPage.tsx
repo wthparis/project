@@ -110,15 +110,15 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
 
   if (loading) {
     return (
-      <div className="flex-1 bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg p-8 animate-pulse">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="aspect-square bg-gray-200 rounded-lg"></div>
+      <div className="flex-1 bg-brand-cream/60 py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse rounded-3xl border border-brand-cream/80 bg-white/80 p-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="aspect-square rounded-3xl bg-brand-cream"></div>
               <div className="space-y-4">
-                <div className="h-8 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                <div className="h-20 bg-gray-200 rounded"></div>
+                <div className="h-8 w-3/4 rounded-full bg-brand-cream" />
+                <div className="h-4 w-1/2 rounded-full bg-brand-cream" />
+                <div className="h-24 rounded-2xl bg-brand-cream" />
               </div>
             </div>
           </div>
@@ -132,33 +132,33 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
   }
 
   return (
-    <div className="flex-1 bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg p-4 md:p-8 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="flex-1 bg-brand-cream/60 py-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 rounded-3xl border border-brand-cream/80 bg-white/90 p-4 md:p-10 shadow-soft">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
             <div>
-              <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
+              <div className="mb-4 aspect-square overflow-hidden rounded-3xl bg-brand-cream">
                 {product.images && product.images.length > 0 ? (
                   <img
                     src={product.images[selectedImage]}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
+                  <div className="flex h-full w-full items-center justify-center text-brand-earth/60">
                     No image
                   </div>
                 )}
               </div>
 
               {product.images && product.images.length > 1 && (
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-4 gap-3">
                   {product.images.map((image, index) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImage(index)}
-                      className={`aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 transition-colors ${
-                        selectedImage === index ? 'border-gray-900' : 'border-transparent'
+                      className={`aspect-square overflow-hidden rounded-2xl border-2 transition-colors ${
+                        selectedImage === index ? 'border-brand-rose' : 'border-transparent'
                       }`}
                     >
                       <img src={image} alt="" className="w-full h-full object-cover" />
@@ -168,33 +168,36 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
               )}
             </div>
 
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <span className="badge-soft">signature</span>
+                <h1 className="text-3xl font-display text-brand-charcoal">{product.name}</h1>
+              </div>
 
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       className={`h-5 w-5 ${
                         i < Math.round(product.rating_average)
-                          ? 'fill-yellow-400 text-yellow-400'
-                          : 'text-gray-300'
+                          ? 'fill-brand-rose text-brand-rose'
+                          : 'text-brand-cream'
                       }`}
                     />
                   ))}
                 </div>
-                <span className="text-gray-600">
+                <span className="text-brand-earth/70">
                   {product.rating_average.toFixed(1)} ({product.rating_count} reviews)
                 </span>
               </div>
 
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-3xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
+              <div className="flex items-center gap-4">
+                <span className="text-3xl font-display text-brand-earth">${product.price.toFixed(2)}</span>
                 {product.original_price && product.original_price > product.price && (
                   <>
-                    <span className="text-xl text-gray-500 line-through">${product.original_price.toFixed(2)}</span>
-                    <span className="bg-red-500 text-white text-sm font-bold px-2 py-1 rounded">
+                    <span className="text-xl text-brand-earth/50 line-through">${product.original_price.toFixed(2)}</span>
+                    <span className="rounded-full bg-brand-rose px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
                       SAVE {Math.round(((product.original_price - product.price) / product.original_price) * 100)}%
                     </span>
                   </>
@@ -202,35 +205,35 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
               </div>
 
               {product.short_description && (
-                <p className="text-gray-600 mb-6">{product.short_description}</p>
+                <p className="text-brand-earth/80">{product.short_description}</p>
               )}
 
               {product.stock_quantity > 0 ? (
-                <div className="mb-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <label className="text-sm font-medium text-gray-700">Quantity:</label>
-                    <div className="flex items-center border border-gray-300 rounded-lg">
+                <div className="space-y-5">
+                  <div className="flex items-center gap-4">
+                    <label className="text-xs font-accent uppercase tracking-[0.2em] text-brand-earth/70">Quantity</label>
+                    <div className="flex items-center rounded-full border border-brand-sage/60 bg-white">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="px-4 py-2 hover:bg-gray-50 transition-colors"
+                        className="px-4 py-2 text-brand-earth/70 transition-colors duration-300 hover:bg-brand-powder/60 hover:text-brand-earth"
                       >
                         -
                       </button>
-                      <span className="px-4 py-2 border-x border-gray-300">{quantity}</span>
+                      <span className="px-4 py-2 text-brand-charcoal">{quantity}</span>
                       <button
                         onClick={() => setQuantity(Math.min(product.stock_quantity, quantity + 1))}
-                        className="px-4 py-2 hover:bg-gray-50 transition-colors"
+                        className="px-4 py-2 text-brand-earth/70 transition-colors duration-300 hover:bg-brand-powder/60 hover:text-brand-earth"
                       >
                         +
                       </button>
                     </div>
                   </div>
 
-                  <div className="flex gap-4">
+                  <div className="flex flex-col gap-3 sm:flex-row">
                     <button
                       onClick={handleAddToCart}
                       disabled={addingToCart}
-                      className="flex-1 bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="btn-primary flex-1 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                       {addingToCart ? (
                         'Adding...'
@@ -241,39 +244,41 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
                         </>
                       )}
                     </button>
-                    <button className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <button className="btn-secondary flex-1 justify-center">
                       <Heart className="h-6 w-6" />
                     </button>
                   </div>
 
                   {product.stock_quantity < 10 && (
-                    <p className="text-orange-600 text-sm mt-2">Only {product.stock_quantity} left in stock!</p>
+                    <p className="text-xs font-accent uppercase tracking-[0.2em] text-brand-rose">
+                      Only {product.stock_quantity} left in stock!
+                    </p>
                   )}
                 </div>
               ) : (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                  <p className="text-red-800 font-semibold">Out of Stock</p>
-                  <p className="text-red-600 text-sm">This product is currently unavailable.</p>
+                <div className="rounded-2xl border border-brand-rose/40 bg-brand-powder/70 p-5">
+                  <p className="font-display text-brand-rose">Out of Stock</p>
+                  <p className="text-sm text-brand-earth/80">This product is currently unavailable.</p>
                 </div>
               )}
 
               {product.description && (
-                <div className="border-t border-gray-200 pt-6">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
-                  <p className="text-gray-600 whitespace-pre-line">{product.description}</p>
+                <div className="border-t border-brand-cream pt-6">
+                  <h2 className="text-lg font-display text-brand-charcoal">Description</h2>
+                  <p className="mt-3 whitespace-pre-line text-brand-earth/80">{product.description}</p>
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-4 md:p-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Customer Reviews</h2>
+        <div className="rounded-3xl border border-brand-cream/80 bg-white/90 p-4 md:p-10 shadow-soft">
+          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-2xl font-display text-brand-charcoal">Customer Reviews</h2>
             {user && (
               <button
                 onClick={() => setShowReviewForm(!showReviewForm)}
-                className="px-4 py-2 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+                className="btn-secondary"
               >
                 Write a Review
               </button>
@@ -281,10 +286,10 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
           </div>
 
           {showReviewForm && (
-            <form onSubmit={handleSubmitReview} className="bg-gray-50 rounded-lg p-6 mb-6">
+            <form onSubmit={handleSubmitReview} className="mb-6 rounded-2xl border border-brand-cream/70 bg-white/80 p-6">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Rating</label>
-                <div className="flex gap-2">
+                <label className="text-sm font-accent uppercase tracking-[0.2em] text-brand-earth/70">Rating</label>
+                <div className="mt-3 flex gap-2">
                   {[1, 2, 3, 4, 5].map((rating) => (
                     <button
                       key={rating}
@@ -292,52 +297,39 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
                       onClick={() => setReviewForm({ ...reviewForm, rating })}
                       className="p-1"
                     >
-                      <Star
-                        className={`h-8 w-8 ${
-                          rating <= reviewForm.rating
-                            ? 'fill-yellow-400 text-yellow-400'
-                            : 'text-gray-300'
-                        }`}
-                      />
+                      <Star className={`h-8 w-8 ${rating <= reviewForm.rating ? 'fill-brand-rose text-brand-rose' : 'text-brand-cream'}`} />
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                <label className="text-sm font-accent uppercase tracking-[0.2em] text-brand-earth/70">Title</label>
                 <input
                   type="text"
                   value={reviewForm.title}
                   onChange={(e) => setReviewForm({ ...reviewForm, title: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                  className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                   placeholder="Sum up your experience"
                 />
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Comment</label>
+                <label className="text-sm font-accent uppercase tracking-[0.2em] text-brand-earth/70">Comment</label>
                 <textarea
                   value={reviewForm.comment}
                   onChange={(e) => setReviewForm({ ...reviewForm, comment: e.target.value })}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                  className="mt-2 w-full rounded-2xl border border-brand-sage/60 bg-white px-4 py-3 text-sm text-brand-charcoal focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/30"
                   placeholder="Tell us about your experience with this product"
                 />
               </div>
 
-              <div className="flex gap-4">
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors"
-                >
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <button type="submit" className="btn-primary">
                   Submit Review
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setShowReviewForm(false)}
-                  className="px-6 py-2 border border-gray-300 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
-                >
+                <button type="button" onClick={() => setShowReviewForm(false)} className="btn-secondary">
                   Cancel
                 </button>
               </div>
@@ -347,15 +339,15 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
           {reviews.length > 0 ? (
             <div className="space-y-6">
               {reviews.map((review) => (
-                <div key={review.id} className="border-b border-gray-200 pb-6 last:border-0">
+                <div key={review.id} className="border-b border-brand-cream pb-6 last:border-0">
                   <div className="flex items-start justify-between mb-2">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold text-gray-900">
+                        <span className="font-semibold text-brand-charcoal">
                           {review.profiles?.full_name || 'Anonymous'}
                         </span>
                         {review.is_verified_purchase && (
-                          <span className="flex items-center gap-1 text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                          <span className="flex items-center gap-1 rounded-full bg-brand-sage/60 px-2 py-1 text-xs font-semibold text-brand-earth">
                             <Check className="h-3 w-3" />
                             Verified Purchase
                           </span>
@@ -366,23 +358,23 @@ export function ProductPage({ slug, onNavigate, onOpenAuth }: ProductPageProps) 
                           <Star
                             key={i}
                             className={`h-4 w-4 ${
-                              i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                              i < review.rating ? 'fill-brand-rose text-brand-rose' : 'text-brand-cream'
                             }`}
                           />
                         ))}
                       </div>
                     </div>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-brand-earth/60">
                       {new Date(review.created_at).toLocaleDateString()}
                     </span>
                   </div>
-                  {review.title && <h3 className="font-semibold text-gray-900 mb-2">{review.title}</h3>}
-                  {review.comment && <p className="text-gray-600">{review.comment}</p>}
+                  {review.title && <h3 className="mb-2 font-display text-brand-charcoal">{review.title}</h3>}
+                  {review.comment && <p className="text-brand-earth/80">{review.comment}</p>}
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-gray-600">
+            <div className="py-12 text-center text-brand-earth/70">
               <p>No reviews yet. Be the first to review this product!</p>
             </div>
           )}

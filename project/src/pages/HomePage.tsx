@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Droplet, Leaf, Sparkles, Star } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import type { Database } from '../lib/database.types';
 
@@ -37,104 +37,119 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div className="flex-1">
-      <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+      <section className="relative overflow-hidden bg-gradient-to-br from-white via-brand-cream to-brand-sage/30 py-24 md:py-32">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-brand-powder/60 blur-3xl" />
+          <div className="absolute -left-24 bottom-10 h-64 w-64 rounded-full bg-brand-sage/40 blur-3xl" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="space-y-8 text-center">
+            <span className="badge-soft mx-auto">artisan hair rituals</span>
+            <h1 className="text-4xl md:text-6xl font-display text-brand-charcoal">
               Discover Your Perfect
-              <span className="block text-gray-700">Hair Care Routine</span>
+              <span className="block text-brand-earth">Botanical Ritual</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Premium products designed to nourish, strengthen, and beautify your hair
+            <p className="mx-auto max-w-2xl text-lg text-brand-earth/80">
+              Premium, sensorielle formulas to nourish, strengthen, and illuminate your hair with the calm elegance of nature.
             </p>
-            <button
-              onClick={() => onNavigate('shop')}
-              className="inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-all transform hover:scale-105"
-            >
-              Shop Now
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-gray-900" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Premium Quality</h3>
-              <p className="text-gray-600">Carefully selected products from trusted brands</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-gray-900" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Expert Advice</h3>
-              <p className="text-gray-600">Beauty tips and guidance from professionals</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-gray-900" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Fast Shipping</h3>
-              <p className="text-gray-600">Quick and secure delivery to your door</p>
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <button onClick={() => onNavigate('shop')} className="btn-primary">
+                Shop the Collection
+                <ArrowRight className="h-5 w-5" />
+              </button>
+              <button onClick={() => onNavigate('blog')} className="btn-secondary">
+                Beauty Tips
+                <ArrowRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Products</h2>
-            <p className="text-gray-600">Discover our most popular hair care essentials</p>
+      <section className="bg-white/90 py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <div className="rounded-3xl border border-brand-cream/70 bg-white/90 p-8 text-center shadow-soft">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-powder/70">
+                <Sparkles className="h-8 w-8 text-brand-rose" />
+              </div>
+              <h3 className="mb-3 text-xl font-display text-brand-charcoal">Premium Quality</h3>
+              <p className="text-sm text-brand-earth/80">Curated formulations from trusted artisans for silky, healthy hair.</p>
+            </div>
+            <div className="rounded-3xl border border-brand-cream/70 bg-white/90 p-8 text-center shadow-soft">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-powder/70">
+                <Leaf className="h-8 w-8 text-brand-rose" />
+              </div>
+              <h3 className="mb-3 text-xl font-display text-brand-charcoal">Holistic Guidance</h3>
+              <p className="text-sm text-brand-earth/80">Beauty rituals and expert advice tailored to your natural texture.</p>
+            </div>
+            <div className="rounded-3xl border border-brand-cream/70 bg-white/90 p-8 text-center shadow-soft">
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-brand-powder/70">
+                <Droplet className="h-8 w-8 text-brand-rose" />
+              </div>
+              <h3 className="mb-3 text-xl font-display text-brand-charcoal">Thoughtful Delivery</h3>
+              <p className="text-sm text-brand-earth/80">From our atelier to your home with care, speed, and eco-conscious packaging.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-brand-cream py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="badge-soft mx-auto">essentials</span>
+            <h2 className="mt-4 text-3xl md:text-4xl font-display text-brand-charcoal">Featured Botanical Care</h2>
+            <p className="mt-3 text-brand-earth/80">Discover the sensorial staples our community is loving right now.</p>
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-white rounded-lg p-4 animate-pulse">
-                  <div className="aspect-square bg-gray-200 rounded-lg mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                <div key={i} className="animate-pulse rounded-3xl border border-brand-cream/60 bg-white/80 p-5">
+                  <div className="mb-4 aspect-square rounded-2xl bg-brand-cream/70" />
+                  <div className="mb-2 h-4 rounded-full bg-brand-cream" />
+                  <div className="h-4 w-2/3 rounded-full bg-brand-cream" />
                 </div>
               ))}
             </div>
           ) : featuredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {featuredProducts.map((product) => (
                 <button
                   key={product.id}
                   onClick={() => onNavigate(`product/${product.slug}`)}
-                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 text-left"
+                  className="group overflow-hidden rounded-3xl border border-brand-cream/80 bg-white/90 text-left shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
                 >
-                  <div className="aspect-square bg-gray-100 flex items-center justify-center">
+                  <div className="aspect-square overflow-hidden rounded-3xl bg-brand-cream">
                     {product.images && product.images.length > 0 ? (
                       <img
                         src={product.images[0]}
                         alt={product.name}
-                        className="w-full h-full object-cover"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="text-gray-400">No image</div>
+                      <div className="flex h-full w-full items-center justify-center text-sm text-brand-earth/50">
+                        No image
+                      </div>
                     )}
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="flex items-center">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm text-gray-600 ml-1">{product.rating_average.toFixed(1)}</span>
+                  <div className="space-y-3 p-5">
+                    <h3 className="line-clamp-2 font-display text-lg text-brand-charcoal">{product.name}</h3>
+                    <div className="flex items-center gap-2 text-sm text-brand-earth/70">
+                      <div className="flex items-center gap-1">
+                        <Star className="h-4 w-4 fill-brand-rose text-brand-rose" />
+                        <span>{product.rating_average.toFixed(1)}</span>
                       </div>
-                      <span className="text-xs text-gray-400">({product.rating_count})</span>
+                      <span>({product.rating_count})</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-lg font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                      <span className="text-lg font-semibold text-brand-earth">
+                        ${product.price.toFixed(2)}
+                      </span>
                       {product.original_price && product.original_price > product.price && (
-                        <span className="text-sm text-gray-500 line-through">${product.original_price.toFixed(2)}</span>
+                        <span className="text-sm text-brand-earth/50 line-through">
+                          ${product.original_price.toFixed(2)}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -142,16 +157,13 @@ export function HomePage({ onNavigate }: HomePageProps) {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600">No featured products available at the moment.</p>
+            <div className="rounded-3xl border border-brand-cream/70 bg-white/80 py-12 text-center">
+              <p className="text-brand-earth/70">No featured products available at the moment.</p>
             </div>
           )}
 
-          <div className="text-center mt-12">
-            <button
-              onClick={() => onNavigate('shop')}
-              className="inline-flex items-center gap-2 text-gray-900 font-semibold hover:gap-4 transition-all"
-            >
+          <div className="mt-12 text-center">
+            <button onClick={() => onNavigate('shop')} className="btn-secondary">
               View All Products
               <ArrowRight className="h-5 w-5" />
             </button>
@@ -159,22 +171,21 @@ export function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Beauty Community</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Get expert hair care tips, exclusive offers, and be the first to know about new products
+      <section className="bg-brand-olive py-20 text-white">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <span className="badge-soft mx-auto bg-white/20 text-white">newsletter</span>
+          <h2 className="mt-6 text-3xl font-display">Join Our Beauty Community</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/80">
+            Receive expert rituals, early access to new creations, and exclusive offers crafted for mindful self-care.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <form className="mx-auto mt-10 flex flex-col gap-4 sm:flex-row">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+              className="flex-1 rounded-full border border-transparent bg-white/90 px-6 py-3 text-brand-charcoal placeholder:text-brand-earth/60 transition-all duration-300 focus:border-brand-rose focus:outline-none focus:ring-2 focus:ring-brand-rose/40"
+              required
             />
-            <button
-              type="submit"
-              className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-            >
+            <button type="submit" className="btn-primary">
               Subscribe
             </button>
           </form>
